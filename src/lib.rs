@@ -163,7 +163,7 @@ pub fn validate_block_height(height: i64) -> (bool, String) {
     if height < 0 {
         (false, "Block height cannot be negative".to_string())
     } else if height > 800_000 {
-        (false, "Block height exceeds realistic range".to_string())
+        (false, "Block height unrealistic".to_string())
     } else {
         (true, "Valid block height".to_string())
     }
