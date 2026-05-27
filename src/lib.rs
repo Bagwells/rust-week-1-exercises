@@ -18,18 +18,13 @@ pub struct Utxo {
 /// Calculate the total Bitcoin reward for a given number of mined blocks.
 pub fn calculate_total_reward(blocks_mined: u64) -> f64 {
     // TODO: Multiply blocks_mined by MINING_REWARD and return result
-    let total_reward = blocks_mined as f64 * MINING_REWARD;
-    total_reward
+    blocks_mined as f64 * MINING_REWARD as f64
 }
 
 /// Return true if the transaction fee is between 0.00001 and 0.01 BTC.
 pub fn is_valid_tx_fee(fee: f64) -> bool {
     // TODO: Check if fee is between 0.00001 and 0.01 BTC (inclusive)
-    if fee >= 0.00001 && fee <= 0.01 {
-        true
-    } else {
-        false
-    }
+    (0.00001..=0.01).contains(&fee)
 }
 
 /// Return true if the wallet balance is greater than 50.0 BTC.
@@ -62,11 +57,7 @@ pub fn is_mainnet(network: &str) -> bool {
 /// Return true if value is in the inclusive range 100..=200.
 pub fn is_in_range(value: i64) -> bool {
     // TODO: Check if 100 <= value <= 200
-    if value >= 100 && value <= 200 {
-        true
-    } else {
-        false
-    }
+    (100..=200).contains(&value)
 }
 
 /// Return true if both references point to the exact same object in memory.
@@ -162,7 +153,7 @@ pub fn validate_block_height(height: i64) -> (bool, String) {
     // TODO: Return (true, "Valid block height") otherwise
     if height < 0 {
         (false, "Block height cannot be negative".to_string())
-    } else if height > 800_000 {
+    } else if !(0..800_000).contains(&height) {
         (false, "Block height unrealistic".to_string())
     } else {
         (true, "Valid block height".to_string())
